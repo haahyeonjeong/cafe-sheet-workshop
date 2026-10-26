@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#204f3a">
+  <meta name="description" content="카페 메뉴를 담고 Google 스프레드시트에 주문 내역을 저장하는 연수용 실습 앱">
+  <title>카페 주문 실습</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#menu-list">메뉴로 바로 가기</a>
+  <header class="site-header page-width">
+    <div><h1 id="cafe-name">카페 주문 실습</h1><p id="cafe-address" class="address"></p></div>
+    <a id="map-link" class="button secondary map-link" target="_blank" rel="noopener noreferrer">네이버 지도에서 매장 보기 <span aria-hidden="true">↗</span></a>
+  </header>
+  <div class="notice page-width"><p>연수용 주문 화면입니다. 매장으로 주문이 전달되거나 결제되지 않습니다.</p><span id="mode-label" class="mode-label" role="status">연결 상태 확인 중</span></div>
+  <main class="page-width layout">
+    <section class="menu-section" aria-labelledby="menu-heading">
+      <div class="section-heading"><h2 id="menu-heading">메뉴</h2><label class="search-field"><span class="sr-only">메뉴 검색</span><input id="search" type="search" placeholder="메뉴 검색" maxlength="50" autocomplete="off"></label></div>
+      <div id="categories" class="categories" role="group" aria-label="메뉴 분류"></div>
+      <div id="menu-list" class="menu-list" tabindex="-1"></div>
+      <p class="menu-note">메뉴와 가격은 실습용 예시입니다. 실제 판매 정보는 매장에서 확인해 주세요.</p>
+    </section>
+    <aside id="cart-panel" class="cart-panel" aria-labelledby="cart-heading">
+      <div class="cart-heading"><h2 id="cart-heading">주문 내역</h2><span id="cart-count">0개</span></div>
+      <div id="cart-items" class="cart-items"></div>
+      <form id="order-form" novalidate>
+        <label for="alias">주문자 별칭</label><input id="alias" name="alias" maxlength="20" placeholder="예: 연수생 01" autocomplete="off" required aria-describedby="alias-help alias-error">
+        <p id="alias-help" class="field-help">실명 대신 실습용 별칭을 적어 주세요.</p><p id="alias-error" class="field-error" hidden></p>
+        <div id="code-field" hidden><label for="workshop-code">실습 코드</label><input id="workshop-code" type="password" maxlength="100" placeholder="안내받은 코드" autocomplete="off" aria-describedby="code-error"><p id="code-error" class="field-error" hidden></p></div>
+        <div class="total-row"><span>합계</span><strong id="cart-total">0원</strong></div>
+        <p id="order-error" class="order-error" role="alert" hidden></p>
+        <button id="submit-order" class="button primary submit-order" type="submit" disabled>연결 상태 확인 중</button>
+        <p id="storage-help" class="storage-help">메뉴를 담으면 주문할 수 있습니다.</p>
+        <button id="retry-config" class="button secondary retry-config" type="button" hidden>연결 상태 다시 확인</button>
+      </form>
+    </aside>
+  </main>
+  <footer class="page-width site-footer"><span>카페 주문 실습</span><span>GitHub → Vercel → Google Sheets</span></footer>
+  <a id="mobile-cart" class="mobile-cart button primary" href="#cart-panel" hidden>주문 내역 보기</a>
+  <p id="announcement" class="sr-only" role="status" aria-live="polite"></p>
+  <dialog id="receipt-dialog" aria-labelledby="receipt-title" aria-describedby="receipt-description">
+    <div class="receipt-mark" aria-hidden="true">✓</div><h2 id="receipt-title">체험 주문을 완료했습니다</h2><p id="receipt-description"></p>
+    <dl class="receipt-details"><div><dt>주문자</dt><dd id="receipt-alias"></dd></div><div><dt>주문 내역</dt><dd id="receipt-items"></dd></div><div><dt>합계</dt><dd id="receipt-total"></dd></div><div><dt>주문ID</dt><dd id="receipt-id" class="order-id"></dd></div></dl>
+    <p class="receipt-footnote">실제 매장에는 주문이 전달되지 않습니다.</p><button id="close-receipt" class="button primary" type="button">새 주문하기</button>
+  </dialog>
+  <noscript>이 주문 화면은 JavaScript를 켜야 사용할 수 있습니다.</noscript>
+</body>
+</html>

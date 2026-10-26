@@ -1,0 +1,14 @@
+node_modules/
+.vercel/
+.env
+.env.*
+!.env.example
+# 다운로드한 서비스 계정 키가 파일명과 관계없이 커밋되지 않도록 JSON은 기본 제외합니다.
+*.json
+!package.json
+!package-lock.json
+!vercel.json
+work/
+*.log
+.DS_Store
+Thumbs.db

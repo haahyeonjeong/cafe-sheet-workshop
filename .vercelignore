@@ -1,0 +1,10 @@
+docs/
+tests/
+scripts/
+work/
+.env*
+*.zip
+README.md
+AGENTS.md
+Design.md
+Soul.md
